@@ -19,5 +19,5 @@ clean:
 build:
 	./boostrap
 
-test: build
+test:
 	py.test test/unit
