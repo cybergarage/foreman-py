@@ -43,7 +43,7 @@ class Client:
         return res.json()
 
     def query_version(self):
-        query = 'EXPORT CONFIG'
+        query = 'EXPORT FROM CONFIG'
         json = self.query_json(query)
         product = json[FOREMAN_CONFIG_CATEGORY_KEY][FOREMAN_CONFIG_PRODUCT_KEY]
         ver = json[FOREMAN_CONFIG_CATEGORY_KEY][FOREMAN_CONFIG_VERSION_KEY]
