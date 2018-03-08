@@ -1,0 +1,11 @@
+#################################################################
+#
+# Foreman for Python
+#
+# Copyright (C) 2017 Yahoo Japan Corporation. All rights reserved.
+#
+# This is licensed under BSD-style license, see file COPYING.
+#
+##################################################################
+
+exec python "`python -c "import os;print(os.path.dirname(os.path.realpath('$0')))"`/export_data.py" "$@"

@@ -1,0 +1,17 @@
+#!/bin/bash
+#################################################################
+#
+# Foreman for Python
+#
+# Copyright (C) 2017 Yahoo Japan Corporation. All rights reserved.
+#
+# This is licensed under BSD-style license, see file COPYING.
+#
+##################################################################
+
+if [ $# -ne 1 ]; then
+    echo "export_data_to_sql <export_data_file>"
+    exit 1
+fi
+
+cat $1 | xargs -Idata echo "SET (data) INTO METRICS"
