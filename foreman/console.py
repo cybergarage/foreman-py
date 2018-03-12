@@ -9,6 +9,7 @@
 ##################################################################
 
 import sys
+import json
 
 from .client import Client
 from .exceptions import ConnectionError
@@ -42,10 +43,10 @@ class Console:
             try:
                 query = self.next_query(FOREMAN_CONSOLE_PROMPT)
                 if query:
-                    result = self.client.query_text(query)
-                    if result:
+                    jsonRes = self.client.query_json(query)
+                    if jsonRes:
                         self.outputLF()
-                        self.output(result)
+                        self.output(json.dumps(jsonRes, indent=4))
                         self.outputLF()
                         self.outputLF()
             except KeyboardInterrupt:
