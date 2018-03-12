@@ -45,6 +45,8 @@ class Client:
     def query_version(self):
         query = 'EXPORT FROM CONFIG'
         json = self.query_json(query)
+        if json is None:
+            return ''
         product = json[FOREMAN_CONFIG_CATEGORY_KEY][FOREMAN_CONFIG_PRODUCT_KEY]
         ver = json[FOREMAN_CONFIG_CATEGORY_KEY][FOREMAN_CONFIG_VERSION_KEY]
         return '%s v%s (%s:%d)' % (product.capitalize(), ver, self.host, self.port)
