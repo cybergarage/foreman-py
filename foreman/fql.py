@@ -19,8 +19,15 @@ if __name__ == '__main__':
     else:
         from .console import Console
 
+    c = Console()
+    
+    args = sys.argv
+    if 2 <= len(args):
+        c.set_host(args[1])
+    if 3 <= len(args):
+        c.set_port(int(args[2]))
+
     try:
-        c = Console()
         if select.select([sys.stdin,],[],[],0.0)[0]:
              c.tty = False
         if c.tty:
