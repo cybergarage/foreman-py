@@ -24,6 +24,12 @@ class Console:
         self.stdout = sys.stdout
         self.stderr = sys.stderr
 
+    def set_host(self, host):
+        self.client.host = host
+
+    def set_port(self, port):
+        self.client.port = port
+
     def next_query(self, prompt=''):
         query = ''
         if self.tty:
