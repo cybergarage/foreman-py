@@ -15,6 +15,8 @@ from .constants import FOREMAN_DEFAULT_SERVER_HOST, FOREMAN_DEFAULT_HTTP_PORT, F
 from .constants import FOREMAN_CONFIG_CATEGORY_KEY, FOREMAN_CONFIG_PRODUCT_KEY, FOREMAN_CONFIG_VERSION_KEY
 from .exceptions import ConnectionError
 
+FOREMAN_CLIENT_DEFAULT_TIMEOUT = 5
+
 class Client:
     def __init__(self):
         self.host = FOREMAN_DEFAULT_SERVER_HOST
@@ -23,7 +25,7 @@ class Client:
     def query(self, query):
         try:
             url = self.__create_query_url(query)
-            res = requests.get(url)
+            res = requests.get(url, timeout=FOREMAN_CLIENT_DEFAULT_TIMEOUT)
             return res
         except requests.exceptions.ConnectionError:
             raise ConnectionError(self.host, self.port)

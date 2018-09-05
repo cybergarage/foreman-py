@@ -17,6 +17,8 @@ from datetime import datetime
 from metric import Metric
 from query import Query
 
+FOREMAN_GRAPHITE_DEFAULT_TIMEOUT = 10
+
 class Graphite():
     def __init__(self):
         self.protocol = 'http'
@@ -34,7 +36,7 @@ class Graphite():
             return False
         url = '%s/metrics/index.json' % (baseURL)
         try:
-            targets = requests.get(url).json()
+            targets = requests.get(url, timeout=FOREMAN_GRAPHITE_DEFAULT_TIMEOUT).json()
             return targets
         except Exception as e:
             sys.stdout.write(e)
@@ -49,7 +51,7 @@ class Graphite():
             return None
         url = '%s/render?target=%s&from=%s&until=%s&format=json' % (baseURL, target, sinceStr, untilStr)
         try:
-            queryObjs = requests.get(url).json()
+            queryObjs = requests.get(url, timeout=FOREMAN_GRAPHITE_DEFAULT_TIMEOUT).json()
         except Exception as e:
             sys.stdout.write(e)
             return None
