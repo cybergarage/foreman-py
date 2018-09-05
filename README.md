@@ -4,18 +4,53 @@
 
 ## Setup
 
+`foreman-py` is not packeged yet, and so get the package from the following git directly.
 ```
 git clone https://github.com/cybergarage/foreman-py.git
-cd foreman-py
-source ./setenv
 ```
+
+To run `foreman-py`, you have to the following modules on your Pyhton environment.
+
 - requests
 
+#### MacOSX
+
+On MacOSX, type the following commands if you use the default Python package.
+
+```
+xcode-select --install
+sudo easy_install requests
+```
 
 ## Executing FQL
 
-### Interactive Mode
+`foreman-py` is not packeged yet, and so use the following command to run it before running `foreman-py`.
 
 ```
-foreman\fql
+cd foreman-py
+source ./setenv
 ```
+
+### Interactive Mode
+
+To run the command utility, `fql`, interactive, type the following command.
+
+```
+./foreman/fql <host> <port>
+```
+
+`fql` tries to connect the local host with the default port when the arguments is not specified.
+
+Using the interactive mode, you can send FQL commands to the connected host.
+
+### Pipeline Mode
+
+`fql` has two execution mode, the above interactive and pipeline mode.
+Using the pipeline mode, you can send massive FQL commands at once.
+To use the pipeline mode, send your FQL commands using Unix pipeline as the following.
+
+```
+cat <your FQL command file> | ./foreman/fql <host> <port>
+```
+
+
