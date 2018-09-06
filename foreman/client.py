@@ -11,7 +11,7 @@
 import urllib
 import requests
 
-from .constants import FOREMAN_DEFAULT_SERVER_HOST, FOREMAN_DEFAULT_HTTP_PORT, FOREMAN_HTTP_SERVER_FQL_PATH, FOREMAN_HTTP_SERVER_FQL_QUERY
+from .constants import FOREMAN_DEFAULT_SERVER_HOST, FOREMAN_DEFAULT_HTTP_PORT, FOREMAN_HTTP_REQUEST_FQL_PATH, FOREMAN_HTTP_REQUEST_FQL_QUERY_PARAM
 from .constants import FOREMAN_CONFIG_CATEGORY_KEY, FOREMAN_CONFIG_PRODUCT_KEY, FOREMAN_CONFIG_VERSION_KEY
 from .exceptions import ConnectionError
 
@@ -57,6 +57,6 @@ class Client:
         url = 'http://%s:%d%s?%s' % (
             self.host, 
             self.port, 
-            FOREMAN_HTTP_SERVER_FQL_PATH,
-            urllib.urlencode({FOREMAN_HTTP_SERVER_FQL_QUERY : query}))
+            FOREMAN_HTTP_REQUEST_FQL_PATH,
+            urllib.urlencode({FOREMAN_HTTP_REQUEST_FQL_QUERY_PARAM : query}))
         return url
