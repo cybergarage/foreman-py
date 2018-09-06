@@ -52,5 +52,3 @@ To use the pipeline mode, send your FQL commands using Unix pipeline as the foll
 ```
 cat <your FQL command file> | ./foreman/fql <host> <port>
 ```
-
-
