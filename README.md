@@ -11,7 +11,7 @@ git clone https://github.com/cybergarage/foreman-py.git
 
 To run `foreman-py`, you have to the following modules on your Pyhton environment.
 
-- requests
+- [requests](http://docs.python-requests.org/en/master/)
 
 #### MacOSX
 
@@ -52,5 +52,3 @@ To use the pipeline mode, send your FQL commands using Unix pipeline as the foll
 ```
 cat <your FQL command file> | ./foreman/fql <host> <port>
 ```
-
-
