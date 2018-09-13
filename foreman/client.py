@@ -13,6 +13,7 @@ import requests
 
 from .constants import FOREMAN_DEFAULT_SERVER_HOST, FOREMAN_DEFAULT_HTTP_PORT, FOREMAN_HTTP_REQUEST_FQL_PATH, FOREMAN_HTTP_REQUEST_FQL_QUERY_PARAM
 from .constants import FOREMAN_CONFIG_CATEGORY_KEY, FOREMAN_CONFIG_PRODUCT_KEY, FOREMAN_CONFIG_VERSION_KEY
+from .constants import FOREMAN_RPC_ERROR, FOREMAN_RPC_ERROR_CODE, FOREMAN_RPC_ERROR_MESSAGE
 from .exceptions import ConnectionError
 
 FOREMAN_CLIENT_DEFAULT_TIMEOUT = 5
@@ -35,18 +36,18 @@ class Client:
     def query_text(self, query):
         res = self.query(query)
         if res.status_code != 200:
-            return 'INVALID REQUEST : %s (%d)' % (query, res.status_code)
-        return res.text
+            return None, 'INVALID REQUEST : %s (%d)' % (query, res.status_code)
+        return res.text, None
 
     def query_json(self, query):
         res = self.query(query)
         if res.status_code != 200:
-            return None
-        return res.json()
+            return None, res.json()
+        return res.json(), None
 
     def query_version(self):
         query = 'EXPORT FROM CONFIG'
-        json = self.query_json(query)
+        json, err = self.query_json(query)
         if json is None:
             return ''
         product = json[FOREMAN_CONFIG_CATEGORY_KEY][FOREMAN_CONFIG_PRODUCT_KEY]
