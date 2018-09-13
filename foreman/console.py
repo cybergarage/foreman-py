@@ -49,10 +49,15 @@ class Console:
             try:
                 query = self.next_query(FOREMAN_CONSOLE_PROMPT)
                 if query:
-                    jsonRes = self.client.query_json(query)
-                    if jsonRes:
-                        self.outputLF()
-                        self.output(json.dumps(jsonRes, indent=4))
+                    self.outputLF()
+                    res, err = self.client.query_json(query)
+                    msg = None
+                    if json is not None:
+                        msg = json.dumps(res, indent=4)
+                    if err is not None:
+                        msg = json.dumps(err, indent=4)
+                    if msg is not None:
+                        self.output(msg)
                         self.outputLF()
                         self.outputLF()
             except KeyboardInterrupt:
