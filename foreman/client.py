@@ -43,7 +43,11 @@ class Client:
         res = self.query(query)
         if res.status_code != 200:
             return None, res.json()
-        return res.json(), None
+        else:
+            if res.text != '':
+                return res.json(), None
+            else:
+                return {}, None
 
     def query_version(self):
         query = 'EXPORT FROM CONFIG'
