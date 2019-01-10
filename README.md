@@ -1,6 +1,6 @@
 ![foreman_logo](doc/img/icon.png)
 
-`foreman-py` is a client package for Foreman, and it has a command line tool, [`fql`](./doc/fql.md), which can execute the domain specific language of Foreman, [Foremqn Query Language](https://github.com/cybergarage/foreman-doc/blob/master/dsl.md), easily.
+`foreman-py` is a client package for Foreman, and it has a command line tool, [`fqlsh`](./doc/fql.md), which can execute the domain specific language of Foreman, [Foremqn Query Language](https://github.com/cybergarage/foreman-doc/blob/master/dsl.md), easily.
 
 ## Setup
 
@@ -24,22 +24,21 @@ sudo easy_install requests
 
 ## Executing FQL
 
-`foreman-py` is not packeged yet, and so use the following command to run it before running `foreman-py`.
-
-```
-cd foreman-py
-source ./setenv
-```
-
 ### Interactive Mode
 
 To run the command utility, `fql`, interactive, type the following command.
 
-```
-./foreman/fql <host> <port>
+```bash
+fqlsh [-h] [-H HOST] [-P PORT] [-E EXECUTE]
 ```
 
-`fql` tries to connect the local host with the default port when the arguments is not specified.
+Example:
+
+```bash
+fqlsh -H foreman.ynwm.cybergarage.org -E 'SELECT * FROM ACTION'
+```
+
+`fqlsh` tries to connect the `localhost` with the default port (8188) when the arguments is not specified.
 
 Using the interactive mode, you can send FQL commands to the connected host.
 
@@ -49,6 +48,6 @@ Using the interactive mode, you can send FQL commands to the connected host.
 Using the pipeline mode, you can send massive FQL commands at once.
 To use the pipeline mode, send your FQL commands using Unix pipeline as the following.
 
-```
-cat <your FQL command file> | ./foreman/fql <host> <port>
+```bash
+fqlsh [-H HOST] [-P PORT] < <your FQL command file>
 ```

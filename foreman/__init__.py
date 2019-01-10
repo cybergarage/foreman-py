@@ -9,9 +9,3 @@
 ##################################################################
 
 from __future__ import absolute_import
-
-__title__ = 'foreman-py'
-
-from .constants import *
-from .console import Console
-from .client import Client
