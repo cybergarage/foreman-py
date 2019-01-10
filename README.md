@@ -2,24 +2,10 @@
 
 `foreman-py` is a client package for Foreman, and it has a command line tool, [`fqlsh`](./doc/fql.md), which can execute the domain specific language of Foreman, [Foremqn Query Language](https://ghe.corp.yahoo.co.jp/nosql/foreman-doc/blob/master/dsl.md), easily.
 
-## Setup
+## Install
 
-`foreman-py` is not packeged yet, and so get the package from the following git directly.
-```
-git clone https://ghe.corp.yahoo.co.jp/nosql/foreman-py.git
-```
-
-To run `foreman-py`, you have to the following modules on your Pyhton environment.
-
-- [requests](http://docs.python-requests.org/en/master/)
-
-#### MacOSX
-
-On MacOSX, type the following commands if you use the default Python package.
-
-```
-xcode-select --install
-sudo easy_install requests
+```bash
+pip install foreman_client
 ```
 
 ## Executing FQL
