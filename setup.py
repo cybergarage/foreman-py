@@ -9,17 +9,15 @@
 #
 ##################################################################
 
-import os
-import sys
 from setuptools import setup
 
 setup(
-    name='foreman-py',
+    name='foreman_client',
     version='0.1',
     description="Time series failure analisys utility.",
     author='Yahoo Japan Corporation',
     author_email='skonno@yahoo-corp.jp',
-    url='https://ghe.corp.yahoo.co.jp/skonno/foreman-py',
+    url='https://ghe.corp.yahoo.co.jp/nosql/foreman-py',
     license='BSD',
     packages=[
         'foreman'
@@ -27,7 +25,11 @@ setup(
     install_requires=[
         'requests',
     ],
-    test_suite='tests',
+    entry_points={
+        'console_scripts': [
+            'fqlsh = foreman.fql:main'
+        ]
+    },
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Other Environment',
@@ -40,5 +42,5 @@ setup(
         'Programming Language :: Python :: 3.4',
         'Topic :: Utilities',
         'License :: OSI Approved :: BSD License',
-    ],    
+    ],
 )
