@@ -45,6 +45,7 @@ nosetests.xml
 coverage.xml
 *.cover
 .hypothesis/
+artifacts/
 
 # Translations
 *.mo
@@ -102,3 +103,6 @@ ENV/
 
 # MacOSX
 .DS_Store
+
+# vscode
+.vscode

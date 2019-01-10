@@ -16,7 +16,8 @@ from .exceptions import ConnectionError
 
 FOREMAN_CONSOLE_PROMPT = "shell> "
 
-class Console:
+
+class Console(object):
     def __init__(self):
         self.tty = True
         self.eof = False
@@ -39,7 +40,7 @@ class Console:
             if query:
                 query = query.strip(' \t\n\r')
                 self.output(query)
-                self.outputLF()
+                self.output_lf()
             else:
                 self.eof = True
         return query
@@ -49,39 +50,38 @@ class Console:
             try:
                 query = self.next_query(FOREMAN_CONSOLE_PROMPT)
                 if query:
-                    self.outputLF()
-                    res, err = self.client.query_json(query)
-                    msg = None
-                    if json is not None:
-                        msg = json.dumps(res, indent=4)
-                    if err is not None:
-                        msg = json.dumps(err, indent=4)
-                    if msg is not None:
-                        self.output(msg)
-                        self.outputLF()
-                        self.outputLF()
+                    self.execute(query)
             except KeyboardInterrupt:
-                self.outputLF()
+                self.output_lf()
                 break
             except EOFError:
-                self.outputLF()
+                self.output_lf()
                 break
-            except ConnectionError as e:
-                self.output(e.message)
-                self.outputLF()
-                break
-            except Exception as e:
-                self.output(e.message)
-                self.outputLF()
+            except ConnectionError as err:
+                self.output(err.message)
+                self.output_lf()
                 break
 
-    def output(self, s):
-        self.stdout.write(s)
+    def execute(self, query):
+        self.output_lf()
+        res, err = self.client.query_json(query)
+        msg = None
+        if json is not None:
+            msg = json.dumps(res, indent=4)
+        if err is not None:
+            msg = json.dumps(err, indent=4)
+        if msg is not None:
+            self.output(msg)
+            self.output_lf()
+        self.output_lf()
 
-    def outputLF(self):
+    def output(self, line):
+        self.stdout.write(line)
+
+    def output_lf(self):
         self.stdout.write('\n')
 
     def output_version(self):
         ver = self.client.query_version()
         self.output(ver)
-        self.outputLF()
+        self.output_lf()
