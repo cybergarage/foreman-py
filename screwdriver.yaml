@@ -1,0 +1,14 @@
+shared:
+  image: cd.docker-registry.corp.yahoo.co.jp:4443/python/python37:latest
+jobs:
+  test:
+    requires: [ ~pr, ~commit ]
+    steps:
+      - install: pip3 install -U tox
+      - py27-lint: tox -e py27-lint
+      - py37-lint: tox -e py37-lint
+      - py27-test: tox -e py27-test,cov-merge
+      - py37-test: tox -e py37-test,cov-merge
+  publish-apj:
+    requires: [ test ]
+    template: python/publish@latest
